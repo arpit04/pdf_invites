@@ -48,7 +48,7 @@ def view(pdf_name):
 
         input_file = "Orignal_pdf/" + pdf_name
         watermark_file = "Watermark_pdf/water.pdf"
-
+        #create the sample pdf for insert the data into your pdf
         output_file = "static/pdf/sample.pdf"
     
         with open(input_file, "rb") as filehandle_input:
@@ -90,6 +90,7 @@ def name(pdf_name):
             print(len(csv_reader))
             print(type(csv_reader))
             count = 0
+            #create pdf for all names in csv file
             for row in pbar(csv_reader):
                 pdf = FPDF()
                 pdf.add_page()
