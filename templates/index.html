@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <style>
+      label{
+        padding: 10px;
+        background: red; 
+        display: table;
+        color: #fff;
+        
+         }
+      input[type="file"] {
+        display: none;
+      }
+  </style>
 </head>
 <body>
 
-<h3>Show a file-select field which allows only one file to be chosen:</h3>
+<h3>Upload your orignal pdf file </h3>
 <form action="/upload" method="POST" enctype="multipart/form-data">
-  Select a file: <input type="file" name="myFile"><br><br>
+  <label>Select a file <input type="file" size="100" name="myFile"></label><br><br>
   <input type="submit">
 </form>
-<!-- <a href="files:pdf_invites.zip" download="pdf_invites">
-  pdf_invites
-</a> -->
-<a href="download/pdf_invites.zip" >download_file</a>
 </body>
 </html>

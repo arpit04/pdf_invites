@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .pdfobject-container {border: 0.1rem solid rgba(0,0,0,.1); }
+    .main-container {
+      width: 100%; 
+      height: 100%
+    }
+    .subRight-container {
+      width: 40%;
+      height: 700px;
+      float:right;
+    }
+    .subLeft-container {
+      width: 40%;
+      float:left;
+    }
+    @media screen and (max-width: 600px) {
+      .subRight-container {
+        width: 100%;
+        height: 700px;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class=main-container>
+    <div class=subLeft-container >
+    <form method="POST">
+    <table border=1 cellspacing=2 cellpadding=15>
+      <tr>
+        <td>Enter x : </td>
+        <td><input type="text" name="x" ></td><br><br>
+      </tr>
+      <tr>
+        <td>Enter y : </td>
+        <td><input type="text" name="y" ></td><br><br>
+      </tr>
+      <tr>
+        <td  colspan="2" align="center"><button>check pdf</button></td>
+      </tr>
+    </table>
+  </form>
+  <a href="{{ url_for('name', pdf_name=pdf_name) }}">get more pdf</a>
+  </div>
+  <div class=subRight-container >
+      <!-- <div id="example1" class=main-container></div> -->
+      <embed src="/static/pdf/sample.pdf" id="myID" class="main-container"  >
+    </div>
+  <script src="/static/js/pdfobject.js"></script>
+  <script>PDFObject.embed("/static/pdf/sample.pdf", "#example1", {id: "myID"});</script>
+
+  </div>
+</body>
+</html>
