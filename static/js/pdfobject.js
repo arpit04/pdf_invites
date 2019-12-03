@@ -1,14 +1,3 @@
-/*global ActiveXObject, window, console, define, module, jQuery */
-//jshint unused:false, strict: false
-
-/*
-    PDFObject v2.0.201604172
-    https://github.com/pipwerks/PDFObject
-    Copyright (c) 2008-2016 Philip Hutchison
-    MIT-style license: http://pipwerks.mit-license.org/
-    UMD module pattern from https://github.com/umdjs/umd/blob/master/templates/returnExports.js
-*/
-
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -25,18 +14,12 @@
 }(this, function () {
 
     "use strict";
-    //jshint unused:true
-
-    //PDFObject is designed for client-side (browsers), not server-side (node)
-    //Will choke on undefined navigator and window vars when run on server
-    //Return boolean false and exit function when running server-side
 
     if(typeof window === "undefined" || typeof navigator === "undefined"){ return false; }
 
     var pdfobjectversion = "2.0.201604172",
         supportsPDFs,
 
-        //declare functions
         createAXO,
         isIE,
         supportsPdfMimeType = (typeof navigator.mimeTypes['application/pdf'] !== "undefined"),
@@ -50,11 +33,6 @@
         isIOS = (function (){ return (/iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase())); })(),
         generateEmbedElement;
 
-
-    /* ----------------------------------------------------
-       Supporting functions
-       ---------------------------------------------------- */
-
     createAXO = function (type){
         var ax;
         try {
@@ -65,22 +43,12 @@
         return ax;
     };
 
-    //IE11 still uses ActiveX for Adobe Reader, but IE 11 doesn't expose
-    //window.ActiveXObject the same way previous versions of IE did
-    //window.ActiveXObject will evaluate to false in IE 11, but "ActiveXObject" in window evaluates to true
-    //so check the first one for older IE, and the second for IE11
-    //FWIW, MS Edge (replacing IE11) does not support ActiveX at all, both will evaluate false
-    //Constructed as a method (not a prop) to avoid unneccesarry overhead -- will only be evaluated if needed
     isIE = function (){ return !!(window.ActiveXObject || "ActiveXObject" in window); };
 
-    //If either ActiveX support for "AcroPDF.PDF" or "PDF.PdfCtrl" are found, return true
-    //Constructed as a method (not a prop) to avoid unneccesarry overhead -- will only be evaluated if needed
     supportsPdfActiveX = function (){ return !!(createAXO("AcroPDF.PDF") || createAXO("PDF.PdfCtrl")); };
 
-    //Determines whether PDF support is available
     supportsPDFs = (supportsPdfMimeType || (isIE() && supportsPdfActiveX()));
 
-    //Create a fragment identifier for using PDF Open parameters when embedding PDF
     buildFragmentString = function(pdfParams){
 
         var string = "",
@@ -93,8 +61,6 @@
                     string += encodeURIComponent(prop) + "=" + encodeURIComponent(pdfParams[prop]) + "&";
                 }
             }
-
-            //The string will be empty if no PDF Params found
             if(string){
 
                 string = "#" + string;
